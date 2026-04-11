@@ -31,4 +31,12 @@ export default buildConfig({
   }),
   sharp,
   plugins: [],
+  cors: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
+  csrf: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
 })
