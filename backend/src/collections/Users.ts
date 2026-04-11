@@ -10,9 +10,9 @@ export const Users: CollectionConfig = {
   auth: true,
   access: {
     read: adminOrUser,
-    update: isAdminFieldLevel,
+    update: () => true,
     delete: isAdminFieldLevel,
-    create: isAdminFieldLevel
+    create: () => true
   },
   fields: [
     {
@@ -29,6 +29,9 @@ export const Users: CollectionConfig = {
         { label: 'Admin', value: 'admin' },
       ],
       saveToJWT: true,
+      access: {
+        update: isAdminFieldLevel
+      }
     },
 
   ],
