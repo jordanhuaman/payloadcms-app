@@ -1,25 +1,21 @@
-import { adminOrSelf } from '@/acess/isAdmin'
-import type { CollectionConfig, Access } from 'payload'
+import { isAdmin } from '@/acess/isAdmin';
+import { isAdminByUserIdRelation, isAdminOrSelf } from '@/acess/isAdminOrSelf';
+import { access, read } from 'fs';
+import { CollectionConfig } from 'payload';
 
 export const Permissions: CollectionConfig = {
   slug: 'permissions',
   admin: {
-    useAsTitle: 'user',
+    useAsTitle: "user"
   },
   access: {
-    read: adminOrSelf,
-    create: ({ req: { user } }) => Boolean(user?.roles?.includes('admin')),
-    update: adminOrSelf,
-    delete: ({ req: { user } }) => Boolean(user?.roles?.includes('admin')),
+    create: isAdmin,
+    read: isAdminByUserIdRelation,
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
-    {
-      name: 'user',
-      type: 'relationship',
-      relationTo: 'users',
-      hasMany: false,
-      required: true,
-    },
+    { name: "user", type: "relationship", relationTo: "users", hasMany: true, required: true },
     {
       name: 'cobranzas',
       type: 'group',
@@ -50,5 +46,7 @@ export const Permissions: CollectionConfig = {
         { name: 'canDelete', type: 'checkbox', defaultValue: false },
       ],
     },
-  ],
+  ]
+
+
 }

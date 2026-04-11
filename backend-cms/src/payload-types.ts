@@ -70,7 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     permissions: Permission;
-    inventory: Inventory;
+    'inventory-items': InventoryItem;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,7 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     permissions: PermissionsSelect<false> | PermissionsSelect<true>;
-    inventory: InventorySelect<false> | InventorySelect<true>;
+    'inventory-items': InventoryItemsSelect<false> | InventoryItemsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -128,7 +128,7 @@ export interface UserAuthOperations {
 export interface User {
   id: string;
   name?: string | null;
-  roles?: ('user' | 'admin')[] | null;
+  roles?: ('admin' | 'User')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -173,7 +173,7 @@ export interface Media {
  */
 export interface Permission {
   id: string;
-  user: string | User;
+  user: (string | User)[];
   cobranzas?: {
     canRead?: boolean | null;
     canCreate?: boolean | null;
@@ -197,9 +197,9 @@ export interface Permission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "inventory".
+ * via the `definition` "inventory-items".
  */
-export interface Inventory {
+export interface InventoryItem {
   id: string;
   nombre: string;
   sku: string;
@@ -247,8 +247,8 @@ export interface PayloadLockedDocument {
         value: string | Permission;
       } | null)
     | ({
-        relationTo: 'inventory';
-        value: string | Inventory;
+        relationTo: 'inventory-items';
+        value: string | InventoryItem;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -369,9 +369,9 @@ export interface PermissionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "inventory_select".
+ * via the `definition` "inventory-items_select".
  */
-export interface InventorySelect<T extends boolean = true> {
+export interface InventoryItemsSelect<T extends boolean = true> {
   nombre?: T;
   sku?: T;
   precio?: T;
