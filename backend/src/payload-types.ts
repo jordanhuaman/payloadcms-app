@@ -202,10 +202,11 @@ export interface Permission {
 export interface Inventory {
   id: string;
   nombre: string;
-  precio: number;
   sku: string;
+  precio: number;
   stock: number;
   imagen?: (string | null) | Media;
+  descripcion?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -372,10 +373,11 @@ export interface PermissionsSelect<T extends boolean = true> {
  */
 export interface InventorySelect<T extends boolean = true> {
   nombre?: T;
-  precio?: T;
   sku?: T;
+  precio?: T;
   stock?: T;
   imagen?: T;
+  descripcion?: T;
   updatedAt?: T;
   createdAt?: T;
 }

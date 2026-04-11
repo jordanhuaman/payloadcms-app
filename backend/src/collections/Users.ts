@@ -1,4 +1,5 @@
-import { isAdminFieldLevel } from '@/acess/isAdmin'
+import { adminOrSelf, adminOrUser, isAdminFieldLevel } from '@/acess/isAdmin'
+import { access } from 'fs'
 import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
@@ -7,6 +8,12 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: true,
+  access: {
+    read: adminOrUser,
+    update: isAdminFieldLevel,
+    delete: isAdminFieldLevel,
+    create: isAdminFieldLevel
+  },
   fields: [
     {
       name: 'name',
@@ -17,15 +24,12 @@ export const Users: CollectionConfig = {
       type: 'select',
       hasMany: true,
       defaultValue: ['user'],
-      options:[
-        {label: 'User', value: 'user'},
-        {label: 'Admin', value: 'admin'},
+      options: [
+        { label: 'User', value: 'user' },
+        { label: 'Admin', value: 'admin' },
       ],
       saveToJWT: true,
-      access:{
-        create: isAdminFieldLevel,
-        update: isAdminFieldLevel,
-      }
-    }
+    },
+
   ],
 }

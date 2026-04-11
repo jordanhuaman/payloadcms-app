@@ -1,9 +1,16 @@
-import { CollectionConfig } from 'payload';
+import { adminOrSelf } from '@/acess/isAdmin'
+import type { CollectionConfig, Access } from 'payload'
 
 export const Permissions: CollectionConfig = {
   slug: 'permissions',
   admin: {
-    useAsTitle: "user",
+    useAsTitle: 'user',
+  },
+  access: {
+    read: adminOrSelf,
+    create: ({ req: { user } }) => Boolean(user?.roles?.includes('admin')),
+    update: adminOrSelf,
+    delete: ({ req: { user } }) => Boolean(user?.roles?.includes('admin')),
   },
   fields: [
     {
@@ -11,7 +18,7 @@ export const Permissions: CollectionConfig = {
       type: 'relationship',
       relationTo: 'users',
       hasMany: false,
-      required: true
+      required: true,
     },
     {
       name: 'cobranzas',
@@ -23,7 +30,7 @@ export const Permissions: CollectionConfig = {
         { name: 'canDelete', type: 'checkbox', defaultValue: false },
       ],
     },
-     {
+    {
       name: 'ventas',
       type: 'group',
       fields: [
@@ -33,7 +40,7 @@ export const Permissions: CollectionConfig = {
         { name: 'canDelete', type: 'checkbox', defaultValue: false },
       ],
     },
-     {
+    {
       name: 'inventario',
       type: 'group',
       fields: [
@@ -43,5 +50,5 @@ export const Permissions: CollectionConfig = {
         { name: 'canDelete', type: 'checkbox', defaultValue: false },
       ],
     },
-  ]
+  ],
 }
