@@ -1,3 +1,4 @@
+import { isAdminFieldLevel } from '@/acess/isAdmin'
 import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
@@ -12,17 +13,18 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
-      name: 'role',
+      name: 'roles',
       type: 'select',
-      defaultValue: 'user',
+      hasMany: true,
+      defaultValue: ['user'],
       options:[
         {label: 'User', value: 'user'},
         {label: 'Admin', value: 'admin'},
       ],
       saveToJWT: true,
       access:{
-        create: () => false,
-        update: ({req})=> req.user?.role === 'admin',
+        create: isAdminFieldLevel,
+        update: isAdminFieldLevel,
       }
     }
   ],
