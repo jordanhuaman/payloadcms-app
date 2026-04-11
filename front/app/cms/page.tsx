@@ -70,9 +70,7 @@ function CMSContent() {
         if (data.valid && data.user) {
           setUser(data.user);
         }
-      } catch {
-        // ignore
-      }
+      } catch { }
     };
     fetchUser();
   }, []);
@@ -83,9 +81,7 @@ function CMSContent() {
         method: 'POST',
         credentials: 'include',
       });
-    } catch {
-      // ignore
-    }
+    } catch { }
     router.push('/login');
   };
 

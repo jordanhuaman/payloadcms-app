@@ -19,7 +19,6 @@ export async function POST() {
     });
 
     const data = await backendRes.json();
-    console.log('Verification response:', data);
 
     if (!data?.user) {
       return NextResponse.json(
