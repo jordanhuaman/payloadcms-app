@@ -10,7 +10,7 @@ async function checkPermission(permission: string, action: 'canRead' | 'canCreat
     return null;
   }
 
-  const verifyRes = await fetch(${API_URL}/api/users/me', {
+  const verifyRes = await fetch(`${API_URL}/api/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
