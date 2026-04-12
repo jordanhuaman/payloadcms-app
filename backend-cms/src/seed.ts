@@ -11,8 +11,8 @@ export const seed = async (payload: Payload) => {
       }
     }
   });
-  if (existUser) {
-    console.log('User already exists');
+  if (existUser.docs[0]) {
+    console.log('User already exists ' + existUser.docs[0]);
     return;
   }
 
