@@ -9,6 +9,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Permissions } from './collections/Permissions'
 import { InventoryItems } from './collections/InventoryItems'
+import { seed } from './seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,4 +40,8 @@ export default buildConfig({
     'http://localhost:3000',
     'http://localhost:3001',
   ],
+  onInit: async (payload) => {
+    console.log('Payload Admin URL:', payload.getAdminURL())
+    await seed(payload)
+  }
 })
