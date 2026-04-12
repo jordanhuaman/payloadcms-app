@@ -1,0 +1,10 @@
+node_modules
+.next
+.git
+*.log
+*.md
+.env*.local
+.pnpm-store
+.history
+.cursor
+media

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { API_URL } from '@/lib/api';
 
 async function checkPermission(permission: string, action: 'canRead' | 'canCreate' | 'canUpdate' | 'canDelete') {
   const cookieStore = await cookies();
@@ -9,7 +10,7 @@ async function checkPermission(permission: string, action: 'canRead' | 'canCreat
     return null;
   }
 
-  const verifyRes = await fetch('http://localhost:3000/api/users/me', {
+  const verifyRes = await fetch('API_URL/api/users/me', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ async function checkPermission(permission: string, action: 'canRead' | 'canCreat
   }
 
   const permsRes = await fetch(
-    `http://localhost:3000/api/permissions?id=${userData.user.id}`,
+    `API_URL/api/permissions?id=${userData.user.id}`,
     {
       method: 'GET',
       headers: {
@@ -48,7 +49,7 @@ export async function GET(request: NextRequest) {
     const payloadToken = cookieStore.get('payload-token');
 
     const backendRes = await fetch(
-      `http://localhost:3000/api/inventory-items/${id}`,
+      `API_URL/api/inventory-items/${id}`,
       {
         method: 'GET',
         headers: {
@@ -78,7 +79,7 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json();
 
     const backendRes = await fetch(
-      `http://localhost:3000/api/inventory-items/${id}`,
+      `API_URL/api/inventory-items/${id}`,
       {
         method: 'PATCH',
         headers: {
@@ -105,7 +106,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const verifyRes = await fetch('http://localhost:3000/api/users/me', {
+    const verifyRes = await fetch('API_URL/api/users/me', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     const permsRes = await fetch(
-      `http://localhost:3000/api/permissions?id=${userData.user.id}`,
+      `API_URL/api/permissions?id=${userData.user.id}`,
       {
         method: 'GET',
         headers: {
@@ -139,7 +140,7 @@ export async function DELETE(request: NextRequest) {
     const id = request.nextUrl.pathname.split('/').pop();
 
     const backendRes = await fetch(
-      `http://localhost:3000/api/inventory-items/${id}`,
+      `API_URL/api/inventory-items/${id}`,
       {
         method: 'DELETE',
         headers: {

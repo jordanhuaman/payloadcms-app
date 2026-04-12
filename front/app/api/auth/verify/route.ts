@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { API_URL } from '@/lib/api';
 
 export async function POST() {
   try {
@@ -10,7 +11,7 @@ export async function POST() {
       return NextResponse.json({ valid: false, message: 'No token' }, { status: 401 });
     }
 
-    const backendRes = await fetch('http://localhost:3000/api/users/me', {
+    const backendRes = await fetch(`${API_URL}/api/users/me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { API_URL } from '../../../lib/api';
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest) {
     }
 
     const backendRes = await fetch(
-      `http://localhost:3000/api/permissions?id=${id}`,
+      `${API_URL}/api/permissions?id=${id}`,
       {
         method: 'GET',
         headers: {

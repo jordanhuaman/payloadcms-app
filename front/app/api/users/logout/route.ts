@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { API_URL } from '@/lib/api';
 
 export async function POST() {
   try {
@@ -10,7 +11,7 @@ export async function POST() {
       return NextResponse.json({ message: 'No session' }, { status: 400 });
     }
 
-    const backendRes = await fetch('http://localhost:3000/api/users/logout', {
+    const backendRes = await fetch('API_URL/api/users/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
