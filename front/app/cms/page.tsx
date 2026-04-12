@@ -88,7 +88,7 @@ function CMSContent() {
 
     const fetchPermissions = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/permissions?id=${user.id}`, {
+        const res = await fetch(`/api/permissions?id=${user.id}`, {
           credentials: 'include',
         });
         const data = await res.json();
@@ -105,7 +105,7 @@ function CMSContent() {
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3000/api/users/logout', {
+      await fetch('/api/users/logout', {
         method: 'POST',
         credentials: 'include',
       });
