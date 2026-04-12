@@ -11,7 +11,7 @@ export async function POST() {
       return NextResponse.json({ message: 'No session' }, { status: 400 });
     }
 
-    const backendRes = await fetch('API_URL/api/users/logout', {
+    const backendRes = await fetch(`${API_URL}/api/users/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ async function checkPermission(permission: string, action: 'canRead' | 'canCreat
     return null;
   }
 
-  const verifyRes = await fetch('API_URL/api/users/me', {
+    const verifyRes = await fetch(`${API_URL}/api/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ async function checkPermission(permission: string, action: 'canRead' | 'canCreat
   }
 
   const permsRes = await fetch(
-    `API_URL/api/permissions?id=${userData.user.id}`,
+    `${API_URL}/api/permissions?id=${userData.user.id}`,
     {
       method: 'GET',
       headers: {
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
     const queryParams = searchParams.toString();
 
     const backendRes = await fetch(
-      `API_URL/api/inventory-items${queryParams ? `?${queryParams}` : ''}`,
+      `${API_URL}/api/inventory-items${queryParams ? `?${queryParams}` : ''}`,
       {
         method: 'GET',
         headers: {
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     const payloadToken = cookieStore.get('payload-token');
     const body = await request.json();
 
-    const backendRes = await fetch('API_URL/api/inventory-items', {
+    const backendRes = await fetch(`${API_URL}/api/inventory-items`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
