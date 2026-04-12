@@ -10,7 +10,7 @@ async function checkPermission(permission: string, action: 'canRead' | 'canCreat
     return null;
   }
 
-    const verifyRes = await fetch(`${API_URL}/api/users/me`, {
+  const verifyRes = await fetch(`${API_URL}/api/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -63,7 +63,8 @@ export async function GET(request: NextRequest) {
 
     const data = await backendRes.json();
     return NextResponse.json(data);
-  } catch {
+  } catch (err) {
+    console.error('Error fetching items:', err);
     return NextResponse.json({ message: 'Error fetching items' }, { status: 500 });
   }
 }
